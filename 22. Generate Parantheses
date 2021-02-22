@@ -1,0 +1,21 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        
+        allParans = []
+        parans = []
+        def backtrack(numOpened, numClosed):
+            if numOpened < numClosed: return
+            if numOpened > n: return
+            if len(parans) == 2*n:
+                allParans.append("".join(parans))
+            else:
+                parans.append("(")
+                backtrack(numOpened+1, numClosed)
+                parans.pop()
+                
+                parans.append(")")
+                backtrack(numOpened, numClosed+1)
+                parans.pop()
+                
+        backtrack(0, 0)
+        return allParans
